@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equip="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>The Psychic Game</h1>
+    </header>
+
+    <p> Guess what letter I'm thinking of</p>
+    <p id="wins-text">wins: 0</p>
+    <p id="losses-text">losses: 0</p>
+    <p id="Guessesleft-text">Guesses Left: 9</p>
+    <p id="Guessedletters-text">Your Guesses so Far: </p>
+
+
+    <script type="text/javascript">
+        var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+            "t", "u", "v", "w", "x", "y", "z"
+        ];
+
+
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 9;
+        var guessedLetters = [];
+
+
+        var winsText = document.getElementById("wins-text")
+        var lossesText = document.getElementById("losses-text");
+        var guessesLeftText = document.getElementById("Guessesleft-text");
+        var guessedLettersText = document.getElementById("Guessedletters-text");
+
+
+        document.onkeyup = function (event) {
+
+
+            var userGuess = event.key;
+            guessedLetters.push(userGuess);
+            var computerChoice = letters[Math.floor(Math.random() * letters.length)];
+
+
+            if (userGuess === computerChoice) {
+                wins++;
+                guessesLeft = 9;
+                guessedLetters.length = 0;
+
+            } else {
+                guessesLeft--;
+            }
+
+            if (guessesLeft === 0) {
+                losses++;
+                guessesLeft = 9;
+                guessedLetters.length = 0;
+            }
+
+
+            winsText.textContent = "wins: " + wins;
+            lossesText.textContent = "losses: " + losses;
+            guessesLeftText.innerHTML = "Guesses Left: " + guessesLeft;
+            guessedLettersText.innerHTML = "Your Guesses so Far: " + guessedLetters.join();
+
+        };
+    </script>
+
+</body>
+
+</html>
